@@ -1,9 +1,15 @@
-/* src/LandingPage.css */
-.landing-page {
-    text-align: center;
-    padding: 20px;
+/* styles/Header.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
   
+  body {
+    margin: 0;
+    padding-top: 65px;
+  }
+
   header {
     display: flex;
     align-items: center;
@@ -15,13 +21,13 @@
     color: #fff;
     display: flex;
     height: 65px;
-    top: 0px;
+    top: 0;
     position: fixed;
     width: 100%;
   }
 
   header h1 {
-    font-family: ‘BCSans’, ‘Noto Sans’, Verdana, Arial, sans-serif;
+    font-family: 'BCSans', 'Noto Sans', Verdana, Arial, sans-serif;
     font-weight: normal;  /* 400 */
     margin: 5px 5px 0 18px;
     visibility: hidden;
@@ -65,19 +71,6 @@
     }
   }
   .logo {
-    width: 50px; /* Adjust the width as needed */
+    width: 200px; /* Adjust the width as needed */
     margin-right: 10px;
   }
-  
-  h1 {
-    margin: 0;
-  }
-  
-  .login-options {
-    text-align: left;
-  }
-  
-  .login-option {
-    margin-top: 20px;
-  }
-  

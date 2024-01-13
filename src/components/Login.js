@@ -1,25 +1,20 @@
-// src/Login.js
+// src/components/LoginPage.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
 import axios from 'axios';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        'https://digital.gov.bc.ca/bcgov-common-components/pathfinder-sso/login',
-        {
-          username,
-          password,
-        }
-      );
+      // Your login logic here...
 
-      // Handle successful login, e.g., set authentication token in state
-      console.log('Login Successful', response.data);
+      // Redirect to the home page after successful login
+      navigate('/home');
     } catch (error) {
-      // Handle login error
       console.error('Login Error', error);
     }
   };
