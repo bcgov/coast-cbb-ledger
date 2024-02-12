@@ -1,10 +1,10 @@
 {
   "confidential-port": 0,
-  "auth-server-url": "https://dev.loginproxy.gov.bc.ca/auth",
-  "realm": "standard",
-  "ssl-required": "external",
-  "resource": "coast-cbb-ledger-5292",
+  "auth-server-url": "${REACT_APP_AUTH_SERVER_URL}",
+  "realm": "${REACT_APP_REALM}",
+  "ssl-required": "${REACT_APP_SSL_REQUIRED}",
+  "resource": "${REACT_APP_RESOURCE}",
   "credentials": {
-    "secret": "LmBP9r0ZvIXLPEkf1HJVmvHo40nv5Hxp"
+    "secret": "${REACT_APP_SECRET}"
   }
 }
