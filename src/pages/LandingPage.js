@@ -1,6 +1,6 @@
 // src/components/LandingPage.js
 import React from 'react';
-import Header from './Header';
+import Header from '../components/Header';
 import '../styles/LandingPage.css'; // Correct path
 
 const LandingPage = () => {

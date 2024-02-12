@@ -1,0 +1,10 @@
+{
+  "confidential-port": 0,
+  "auth-server-url": "https://dev.loginproxy.gov.bc.ca/auth",
+  "realm": "standard",
+  "ssl-required": "external",
+  "resource": "coast-cbb-ledger-5292",
+  "credentials": {
+    "secret": "LmBP9r0ZvIXLPEkf1HJVmvHo40nv5Hxp"
+  }
+}

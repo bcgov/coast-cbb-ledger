@@ -1,13 +1,15 @@
-// ControlLedger.js
+// ControlLedgerPage.js
+
 import React from 'react';
 
-const ControlLedger = () => {
+function ControlLedgerPage() {
   return (
     <div>
-      <h2>Control Ledger</h2>
-      {/* Your content for the Control Ledger page */}
+      <h1>Control Ledger Page</h1>
+      <p>This is the Control Ledger page of the ledger application.</p>
+      <p>Add your content and functionality specific to the Control Ledger page here.</p>
     </div>
   );
-};
+}
 
-export default ControlLedger;
+export default ControlLedgerPage;

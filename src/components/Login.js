@@ -1,50 +1,23 @@
-// src/components/LoginPage.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import Keycloak from 'keycloak-js';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  useEffect(() => {
+    const keycloak = Keycloak('config/keycloak.js');
 
-  const handleLogin = async () => {
-    try {
-      // Your login logic here...
-
-      // Redirect to the home page after successful login
-      navigate('/home');
-    } catch (error) {
-      console.error('Login Error', error);
-    }
-  };
+    keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+      if (authenticated) {
+        // User is authenticated, redirect to home page or protected route
+        window.location.href = '/home'; // Redirect to the home page
+      } else {
+        console.log('Authentication failed');
+      }
+    });
+  }, []);
 
   return (
     <div>
-      <h1>Login</h1>
-      <form>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
-      </form>
+      <p>Redirecting to login page...</p>
     </div>
   );
 };

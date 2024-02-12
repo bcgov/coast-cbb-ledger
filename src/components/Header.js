@@ -5,7 +5,7 @@ import '../styles/Header.css';
 const Header = () => {
   return (
     <header>
-      <img src="../assets/images/BCID_H_rgb_rev.svg" alt="British Columbia Official Logo" className="logo" />
+      <img src="/public/assets/images/BCID_H_rgb_rev.svg" alt="British Columbia Official Logo" className="logo" />
       <h1>Coast Cruise Based Billing Ledger</h1>
     </header>
   );
