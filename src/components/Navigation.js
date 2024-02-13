@@ -1,12 +1,22 @@
-// src/components/Navigation.js
 // Navigation.js
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Navigation.css'; // Import your CSS file for styling
 
 const Navigation = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
-    <nav>
-      <ul>
+    <nav className="navigation">
+      <div className="hamburger" onClick={toggleMenu}>
+        &#9776; {/* Hamburger icon */}
+      </div>
+      <ul className={`menu ${showMenu ? 'show' : ''}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/control-ledger">Control Ledger</Link></li>
         <li><Link to="/decked-cruise-billing">Decked Cruise Billing</Link></li>
@@ -20,3 +30,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

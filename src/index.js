@@ -1,28 +1,9 @@
 // index.js
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'path-browserify';
-import 'os-browserify/browser';
-import 'crypto-browserify';
+// Import your main application file
+import App from './App.jsx';
+import { createRoot } from 'react-dom';
 
 
-require('dotenv').config();
-
-// Add a fallback for the 'stream' module polyfill
-if (!window.stream) {
-  window.stream = require('stream-browserify');
-}
-
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-reportWebVitals();
+// After
+createRoot(document.getElementById('app')).render(<App />);
 
