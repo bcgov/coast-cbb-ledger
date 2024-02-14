@@ -2,7 +2,6 @@
 
 # dependencies
 /node_modules
-.env
 /.pnp
 .pnp.js
 
@@ -24,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 devnotes
+src/config/Coast CBB Ledger-installation-dev.json
