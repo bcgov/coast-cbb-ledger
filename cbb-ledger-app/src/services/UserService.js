@@ -6,9 +6,9 @@ import Keycloak from "keycloak-js";
 config(); // Load environment variables from .env file
 
 const _kc = new Keycloak({
-    realm: import.meta.env.REACT_APP_REALM,
-    url: import.meta.env.REACT_APP_AUTH_SERVER_URI,
-    clientId: import.meta.env.REACT_APP_RESOURCE,
+    realm: process.env.REACT_APP_REALM,
+    url: process.env.REACT_APP_AUTH_SERVER_URI,
+    clientId: process.env.REACT_APP_RESOURCE,
 });
 
 const initKeycloak = (onAuthenticatedCallback) => {

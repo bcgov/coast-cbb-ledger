@@ -13,7 +13,7 @@ import UserService from "./services/UserService";
 const { history, store } = StoreService.setup();
 
 const renderApp = () => ReactDOM.render(<App {...{store, history}} />, 
- document.getElementById(elementid: "app"));
+ document.getElementById("app"));
 
 UserService.initKeycloak(renderApp);
 HttpService.configure();
