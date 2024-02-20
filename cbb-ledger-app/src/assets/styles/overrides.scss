@@ -1,0 +1,163 @@
+// Vuetify Overrides
+@import "theme.scss";
+
+// Buttons
+.v-btn {
+  min-width: 0;
+  text-transform: none;
+  font-weight: 500;
+  letter-spacing: normal;
+
+  .v-icon + span,
+  span + .v-icon {
+    margin-left: 0.25rem;
+  }
+}
+
+// Disabled Buttons
+.theme--light.v-btn.v-btn--disabled.btn-outlined-primary {
+  color: $app-blue !important;
+  opacity: 0.4;
+
+  .v-icon {
+    color: $app-blue !important;
+  }
+}
+
+.theme--light.v-btn.v-btn--disabled.btn-outlined-error {
+  color: $app-red !important;
+  opacity: 0.4;
+
+  .v-icon {
+    color: $app-red !important;
+  }
+}
+
+// Text Inputs
+.v-text-field--box .v-label--active,
+.v-text-field--full-width .v-label--active,
+.v-text-field--outline .v-label--active {
+  transform: translateY(-8px) scale(0.75);
+}
+
+// Disabled Text Fields
+.v-text-field.v-input--is-readonly {
+  pointer-events: none;
+
+  .v-input__slot:before {
+    border-style: dotted !important;
+    border-color: $gray7 !important;
+  }
+}
+
+// V-Cards
+.v-card {
+  .v-card__title {
+    word-break: break-word;
+  }
+  .v-card__text {
+    font-size: $px-16;
+    color: $gray7;
+  }
+}
+
+// Dialogs
+.v-dialog {
+  margin: 2rem;
+
+  .v-card {
+    .v-card__title {
+      padding: 1.25rem 1.5rem;
+      color: $BCgovFontColorInverted;
+      background-color: $BCgovBlue5;
+      font-size: $px-24;
+      font-weight: 400;
+    }
+
+    .v-card__text {
+      padding: 1.5rem !important;
+      font-weight: 300;
+    }
+
+    .v-card__actions {
+      padding: 1rem;
+    }
+  }
+}
+
+// Expansion Panels
+.v-expansion-panel:before {
+  box-shadow: none;
+}
+
+.v-expansion-panel.align-items-top {
+  .v-expansion-panel-header__icon {
+    align-self: flex-start;
+    margin-top: 0;
+  }
+}
+
+.v-expansion-panel-header.no-dropdown {
+  .v-expansion-panel-header__icon{
+    display: none;
+  }
+}
+
+.v-divider {
+  border-color: $gray3 !important;
+}
+
+// Checkbox Labels
+.v-input--checkbox .v-input__control .v-input__slot {
+  .v-label {
+    color: $gray7;
+  }
+}
+
+// Disabled Checkboxes
+.v-input--checkbox.v-input--is-disabled .v-input__control .v-input__slot {
+  // NB: do not change label opacity or color
+  .v-input--selection-controls__input i {
+    color: $app-blue !important;
+    opacity: 0.4;
+  }
+}
+
+// Error Checkboxes
+.v-input--checkbox.error--text .v-icon {
+  // revert icon to theme-light colour
+  color: rgba(0, 0, 0, 0.54) !important;
+  caret-color: rgba(0, 0, 0, 0.54) !important;
+}
+
+// Tooltips
+.v-tooltip__content {
+  background-color: RGB(73,80,87) !important;
+  color: white !important;
+  border-radius: 4px;
+  font-size: $px-12 !important;
+  line-height: 18px !important;
+  padding: 20px !important;
+  letter-spacing: 0;
+
+}
+
+.v-tooltip__content:after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: 100% !important;
+  margin-top: -10px !important;
+  border-top: 10px solid transparent !important;
+  border-bottom: 10px solid transparent !important;
+  border-right: 8px solid RGBA(73,80,87,0.95) !important;
+}
+
+.top-tooltip:after {
+  top: 100% !important;
+  left: 46.75% !important;
+  margin-top: 0 !important;
+  border-right: 10px solid transparent !important;
+  border-left: 10px solid transparent !important;
+  border-top: 8px solid RGBA(73,80,87,0.95) !important;
+}
