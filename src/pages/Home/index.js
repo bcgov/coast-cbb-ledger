@@ -1,14 +1,13 @@
 import { useContext } from 'react';
-import { AuthenticationContext } from '../../../../frontend/src/App';
-import { logout } from '../../utils/keycloak';
-import * as moment from 'moment';
+import { AuthenticationContext } from '../../App';
+import { logout } from '../../services/keycloak';
+import moment from 'moment';
 
 function Home() {
   const keycloak = useContext(AuthenticationContext);
 
   const formatDate = (unixTime) => {
-    const formattedDate = moment(unixTime * 1000);
-    return formattedDate.isValid() ? formattedDate.format('dddd, MMMM Do, YYYY h:mm A') : 'Invalid Date';
+    return moment(unixTime * 1000).format('dddd, MMMM Do, YYYY h:mm A');
   };
 
   return (

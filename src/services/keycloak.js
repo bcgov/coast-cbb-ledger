@@ -1,14 +1,15 @@
 import Keycloak from 'keycloak-js';
 
 const _kc = new Keycloak({
-  url: import.meta.env.REACT_APP_SSO_AUTH_SERVER_URL,
-  realm: import.meta.env.REACT_APP_SSO_REALM,
-  clientId: import.meta.env.REACT_APP_SSO_CLIENT_ID,
+  url: process.env.REACT_APP_SSO_AUTH_SERVER_URL,
+  realm: process.env.REACT_APP_SSO_REALM,
+  clientId: process.env.REACT_APP_SSO_CLIENT_ID,
 });
 
 const loginOptions = {
-  redirectUri: import.meta.env.REACT_APP_SSO_REDIRECT_URI,
+  redirectUri: process.env.REACT_APP_SSO_REDIRECT_URI,
   idpHint: '',
+  pres_req_conf_id: process.env.REACT_APP_PRES_REQ_CONF_ID,
 };
 
 export const initializeKeycloak = async () => {
@@ -37,7 +38,18 @@ export const initializeKeycloak = async () => {
     if (auth) {
       return _kc;
     } else {
-      _kc.login(loginOptions);
+      if(loginOptions.pres_req_conf_id){
+        var loginURL = _kc?.createLoginUrl(loginOptions);
+        if(loginURL){
+          /* The keycloak-js library will not pass in the `pres_req_conf_id` needed for DC login
+          meaning the login url must have it appended.  */
+          // @ts-ignore//
+          window.location.href = loginURL + '&pres_req_conf_id=' + loginOptions.pres_req_conf_id;
+        };
+      } else {
+        console.warn("DC needs a REACT_APP_PRES_REQ_CONF_ID env variable defined to work properly");
+        _kc.login(loginOptions);
+      }
     }
   } catch (err) {
     console.log(err);
@@ -48,9 +60,9 @@ export const initializeKeycloak = async () => {
 // if using post_logout_redirect_uri, then either client_id or id_token_hint has to be included and post_logout_redirect_uri need to match
 // one of valid post logout redirect uris in the client configuration
 export const logout = () => {
-  window.location.href = `https://logon7.gov.bc.ca/clp-cgi/logoff.cgi?retnow=1&returl=${encodeURIComponent(
-    `${import.meta.env.REACT_APP_SSO_AUTH_SERVER_URL}/realms/${import.meta.env.REACT_APP_SSO_REALM}/protocol/openid-connect/logout?post_logout_redirect_uri=` +
-    import.meta.env.REACT_APP_SSO_REDIRECT_URI +
+  window.location.href = `${process.env.REACT_APP_SITEMINDER_LOGOUT}?retnow=1&returl=${encodeURIComponent(
+    `${process.env.REACT_APP_SSO_AUTH_SERVER_URL}/realms/${process.env.REACT_APP_SSO_REALM}/protocol/openid-connect/logout?post_logout_redirect_uri=` +
+      process.env.REACT_APP_SSO_REDIRECT_URI +
       '&id_token_hint=' +
       _kc.idToken,
   )}`;
