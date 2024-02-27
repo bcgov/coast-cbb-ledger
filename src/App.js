@@ -1,41 +1,27 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './pages/Home';
-import { useState, useEffect, useCallback } from 'react';
-import { initializeKeycloak } from './services/keycloak';
-import { createContext } from 'react';
+// App.js
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home keycloak />,
-  },
-]);
+import express from 'express';
+import { passport } from './server'; // Remove the .js extension
 
-export const AuthenticationContext = createContext('authentication');
+const app = express();
 
-function App() {
-  const [keycloak, setKeycloak] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-  const initKeycloak = useCallback(async () => {
-    const _keycloak = await initializeKeycloak();
-    setIsAuthenticated(_keycloak.authenticated);
-    setKeycloak(_keycloak);
-  }, []);
+// Routes
+// Define your routes here
 
-  useEffect(() => {
-    initKeycloak();
-  }, [initKeycloak]);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong!');
+});
 
-  return (
-    <>
-      {isAuthenticated && (
-        <AuthenticationContext.Provider value={keycloak}>
-          <RouterProvider router={router} />
-        </AuthenticationContext.Provider>
-      )}
-    </>
-  );
-}
+app.listen(3000, function () {
+  console.log('Server running on port 3000');
+});
 
-export default App;
+export default app;

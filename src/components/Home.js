@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Keycloak from 'keycloak-js';
-import { KeycloakProvider, useKeycloak } from '@react-keycloak/web';
+import { KeycloakProvider } from '@react-keycloak/web';
 
 const keycloak = Keycloak({
   url: 'http://localhost:8080/auth',
