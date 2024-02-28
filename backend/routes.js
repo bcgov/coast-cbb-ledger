@@ -1,12 +1,7 @@
-// routes.js
-
-import { passport, tokenset } from './server.js';
-import express from 'express';
-
-const router = express.Router();
+import { passport, keycloakClient, tokenset } from './server.js';
 
 const checkAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
+  if (req?.session?.passport?.user) {
     return next();
   }
   res.redirect('/');
@@ -30,25 +25,22 @@ export const setRoutes = (router) => {
 
   router.get('/home', checkAuthenticated, (req, res, next) => {
     res.render('home', {
-      username: `${req.user.given_name} ${req.user.family_name}`,
+      username: `${req.session.passport.user.given_name} ${req.session.passport.user.family_name}`,
     });
   });
 
   router.get('/logout', (req, res, next) => {
-    req.logout();
+    req.session.destroy();
     const retUrl = `${process.env.SSO_AUTH_SERVER_URL}/realms/${
       process.env.SSO_REALM
     }/protocol/openid-connect/logout?post_logout_redirect_uri=${encodeURIComponent(
       process.env.SSO_LOGOUT_REDIRECT_URI,
     )}&id_token_hint=${tokenset.id_token}`;
-    res.redirect(retUrl);
-  });
-
-  // Error handling middleware
-  router.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something went wrong!');
+    res.redirect(`https://logon7.gov.bc.ca/clp-cgi/logoff.cgi?retnow=1&returl=${encodeURIComponent(retUrl)}`);
   });
 };
 
-export default router;
+router.get('/api/data', (req, res) => {
+  const data = { message: 'Hello from the backend!' };
+  res.json(data);
+});
