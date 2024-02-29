@@ -38,6 +38,11 @@ export const setRoutes = (router) => {
     )}&id_token_hint=${tokenset.id_token}`;
     res.redirect(`https://logon7.gov.bc.ca/clp-cgi/logoff.cgi?retnow=1&returl=${encodeURIComponent(retUrl)}`);
   });
+
+  router.get('/api/data', (req, res) => {
+    const data = { message: 'Hello from the backend!' };
+    res.json(data);
+  });
 };
 
 router.get('/api/data', (req, res) => {

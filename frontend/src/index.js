@@ -1,11 +1,7 @@
-// frontend/src/index.js
-
-// frontend/src/index.js
-
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -17,4 +13,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+createRoot(document.getElementById('root')).render(<App />);

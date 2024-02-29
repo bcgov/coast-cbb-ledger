@@ -88,6 +88,22 @@ app.get('/home', (req, res) => {
   res.render('index', { username: req.user.preferred_username });
 });
 
+// Define a route for the index page
+app.get('/index', (req, res) => {
+  res.render('index'); // Assuming index.ejs is in the views folder
+});
+
+// Define a route for handling 404 errors
+app.use((req, res, next) => {
+  res.status(404).send("Sorry, can't find that!");
+});
+
+// Define a route for handling errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 // Start the server
 app.listen(3000, function () {
   console.log('Listening at http://localhost:3000');

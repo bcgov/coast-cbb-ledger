@@ -1,7 +1,0 @@
-@import '~@bcgov/design-tokens/scss/index';
-@use '~@bcgov/design-tokens/index';
-
-.login {
-  background-color: designTokens.$color-white;
-  color: designTokens.$color-black;
-}

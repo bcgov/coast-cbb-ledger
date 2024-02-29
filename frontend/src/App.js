@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+// App.js
+
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import Index from './components/Index';
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('/api/data')
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
-
   return (
-    <div>
-      <h1>Data from Backend:</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/index" element={<Index />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+
