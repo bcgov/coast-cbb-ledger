@@ -1,0 +1,14 @@
+// src/pages/DashboardPage.js
+
+const DashboardPage = () => {
+  
+
+  return (
+    <div>
+      <h1>Welcome to Your Dashboard!</h1>
+      
+    </div>
+  );
+};
+
+export default DashboardPage;
