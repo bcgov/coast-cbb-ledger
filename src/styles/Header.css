@@ -15,6 +15,7 @@ header {
   width: 100%;
   box-shadow: 0 6px 8px -4px #b3b1b3;
   margin: 0;
+  z-index: 1000;
 }
 
 header h1 {

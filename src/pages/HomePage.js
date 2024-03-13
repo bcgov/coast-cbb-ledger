@@ -5,21 +5,26 @@ import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import '../styles/HomePage.css'
 import '@bcgov/bc-sans/css/BCSans.css';
-import forestPicture from '../assets/images/shayd-johnson-3SYi9YfTXdU-unsplash.jpg'
+import forestPicture from '../assets/images/mossyforest.jpg'
 
 const HomePage = () => {
   return (
     <>
-    <Header />
-    <Navbar />
-    <div className='content'>
-      <div className='image-container'>
-        <img src={forestPicture} alt='Looking down at tall trees' />
+      <Header />
+      <Navbar />
+      <div className='carousel'>
+        {/* Carousel content */}
       </div>
-      <h2>This application is built to support the Coast Area Pricing team for cruise-based billing.</h2>
-      <p>Please login using your IDIR</p>
-      <Home />
-    </div>
+      <div className='image-container'>
+        <img src={forestPicture} alt='A view of a rain forest' className='forest-image' />
+        <div className='text-container'>
+          <h1>Coast Cruise Based Billing Ledger</h1>
+          <p>This application is designed to support the cruise based billing ledger functions for the Coast Area.</p>
+        </div>
+      </div>
+      <div className='content'>
+        <Home />
+      </div>
     </>
   );
 };

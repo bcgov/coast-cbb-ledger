@@ -6,6 +6,7 @@
   background-color: #38598a;
   width: 100%;
   box-shadow: 0 6px 8px -4px #b3b1b3;
+  z-index: 1000;
 }
 
 .navigation-main .container {
