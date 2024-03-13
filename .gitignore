@@ -26,3 +26,6 @@ node_modules
 
 #dev server certificates
 ssl/
+
+/assets/images
+src/assets/images/shayd-johnson-3SYi9YfTXdU-unsplash.jpg
