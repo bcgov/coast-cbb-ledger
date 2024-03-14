@@ -6,6 +6,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import { initializeKeycloak } from './services/keycloak';
 import HomePage from './pages/HomePage.js';
 import DashboardPage from './pages/DashboardPage';
+import ControlLedgerPage from './pages/ControlLedgerPage';
+import DeckedCruiseBillingPage from './pages/DeckedCruiseBillingPage';
+import PipelineMarksPage from './pages/PipelineMarksPage';
+import MLCOilandGasPage from './pages/MLCOilandGasPage';
+import TimberMarkReportLookupPage from './pages/TimberMarkReportLookupPage';
 
 export const AuthenticationContext = createContext('authentication');
 
@@ -14,7 +19,12 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={ <HomePage />} />
-        <Route path="/dashboard" element={ <DashboardPage />} />
+        <Route path="/dashboard" element={ <DashboardPage /> } />
+        <Route path="/control-ledger" element={ <ControlLedgerPage /> } />
+        <Route path="/decked-cruise-billing" element={ <DeckedCruiseBillingPage /> } />
+        <Route path="/pipeline-marks" element={ <PipelineMarksPage /> } />
+        <Route path="/mlc-oil-and-gas" element={ <MLCOilandGasPage /> } />
+        <Route path="/timber-mark-report-lookup" element={ <TimberMarkReportLookupPage /> } />
       </Routes>
     </Router>
   );

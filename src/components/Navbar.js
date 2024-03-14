@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Navbar.css'
 import '@bcgov/bc-sans/css/BCSans.css';
 
@@ -7,12 +8,12 @@ const Navbar = () => {
     <nav className="navigation-main" id="navbar">
       <div className="container">
         <ul>
-          <li><a href="../pages/DashboardPage.js">Dashboard</a></li>
-          <li><a href="../pages/ConrtolLedgerPage.js">Control Ledger</a></li>
-          <li><a href="../pages/DeckedCruiseBillingPage.js">Decked Cruise Billing</a></li>
-          <li><a href="../pages/PipelineMarksPage.js">Pipeline Marks</a></li>
-          <li><a href="../pages/MLCOilandGasPage.js">MLC Oil and Gas</a></li>
-          <li><a href="../pages/TimberMarkReportLookupPage.js">Timber Mark Report Lookup</a></li>
+          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/control-ledger">Control Ledger</Link></li>
+          <li><Link to="/decked-cruise-billing">Decked Cruise Billing</Link></li>
+          <li><Link to="/pipeline-marks">Pipeline Marks</Link></li>
+          <li><Link to="/mlc-oil-and-gas">MLC Oil and Gas</Link></li>
+          <li><Link to="/timber-mark-report-lookup">Timber Mark Report Lookup</Link></li>
         </ul>
       </div>
     </nav>
@@ -20,3 +21,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
