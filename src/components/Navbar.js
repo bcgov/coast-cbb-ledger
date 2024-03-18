@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Navbar.css'
+import '../styles/components/Navbar.css'
 import '@bcgov/bc-sans/css/BCSans.css';
 
 const Navbar = () => {
@@ -21,4 +21,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

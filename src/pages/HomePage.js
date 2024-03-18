@@ -3,7 +3,7 @@ import React from 'react';
 import Home from '../components/Home';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
-import '../styles/HomePage.css'
+import '../styles/pages/HomePage.css'
 import '@bcgov/bc-sans/css/BCSans.css';
 import forestPicture from '../assets/images/mossyforest.jpg'
 

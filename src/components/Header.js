@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/logo-banner.png'
-import '../styles/Header.css'
+import '../styles/components/Header.css'
 import '@bcgov/bc-sans/css/BCSans.css';
 
 const Header = () => {

@@ -1,0 +1,74 @@
+/* components/Card.css */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px; /* Set a wider width for the card */
+    height: 400px; /* Set a taller height for the card */
+    padding: 20px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a border for better visibility */
+    justify-content: space-between;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover for a subtle effect */
+  }
+  
+  .card-image {
+    margin-bottom: 10px; /* Add space between image and text */
+  }
+  
+  .card img {
+    width: 200px; /* Set the width of the image */
+    height: 200px; /* Set the height of the image */
+  }
+  
+  .card-content {
+    text-align: center; /* Center the text */
+  }
+  
+  .card-content h2 {
+    font-family: 'BC Sans', sans-serif; /* Use BC Sans font */
+    white-space: normal; /* Allow text to wrap */
+    font-size: 18px; /* Set font size to 18px */
+    font-weight: 700; /* Set font weight to 700 (bold) */
+    color: rgb(26, 90, 150); /* Set text color */
+    transition: margin-right 0.3s ease 0s; /* Add transition effect */
+  }
+  
+  .card-content p {
+    margin: 0px; /* Remove any margin */
+    color: rgb(70, 67, 65); /* Set text color */
+    font-family: 'BC Sans', sans-serif; /* Use BC Sans font */
+    font-size: 16px; /* Set font size to 16px */
+    font-weight: 400; /* Set font weight to 400 (normal) */
+    max-height: 100px; /* Adjust the max height of the description */
+    overflow: hidden;
+    white-space: pre-wrap;
+  }
+  
+  .card-link {
+    display: inline-block; /* Ensure the link only takes up the necessary space */
+    margin-top: 10px;
+}
+  
+  .card-link img {
+    width: 16px; /* Set the width of the icon */
+    height: 16px; /* Set the height of the icon */
+  }
+ 
+  .arrow-icon {
+    width: 16px; /* Set the initial width of the icon */
+    height: 16px; /* Set the initial height of the icon */
+    filter: invert(19%) sepia(87%) saturate(2266%) hue-rotate(203deg) brightness(92%) contrast(90%); /* Match the specified RGB value */
+    transition: transform 0.3s ease; /* Add a transition for the transform property */
+  }
+  
+  .card-link:hover .arrow-icon {
+    transform: scale(1.2) translateX(5px); /* Make the icon 20% larger and move 5px to the right on hover */
+  }
