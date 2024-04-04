@@ -56,4 +56,9 @@ export const logout = () => {
       '&id_token_hint=' +
       _kc.idToken,
   )}`;
+
+  // Clear Keycloak session
+  _kc.clearToken();
+  _kc.clearRefreshToken();
+  _kc.clearAuthz();
 };

@@ -13,7 +13,7 @@ const DashboardPage = () => {
       <Navbar />
       <div className="dashboard">
         {/* *username function and time of day, eg Good morning? */}
-        <h1>Welcome, (username), to your dashboard!</h1>
+        <h1>Welcome to your dashboard, (username)!</h1>
       </div>
       <div className='dashboard-cards'>
         <Card

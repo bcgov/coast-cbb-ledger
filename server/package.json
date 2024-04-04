@@ -1,0 +1,24 @@
+{
+  "name": "cbbledgerapp-backend",
+  "version": "1.0.0",
+  "description": "The backend server setup for the CBB Ledger App using Node.js and Express.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "keycloak",
+    "ledger",
+    "server"
+  ],
+  "author": "BCGov",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "winston": "^3.13.0"
+  }
+}

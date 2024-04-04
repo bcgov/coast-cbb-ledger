@@ -1,0 +1,332 @@
+Database:
+cbbledgerappdb
+
+dev namespace (Openshift):
+afa0a8-dev
+
+pods: cmalloch@NE087948:~/crunchy-postgres/charts/crunchy-postgres$ kubectl get pods -n afa0a8-dev
+NAME                                          READY   STATUS    RESTARTS   AGE
+crunchy-postgres-ha-8ltn-0                    4/4     Running   0          2m12s
+crunchy-postgres-ha-d4ml-0                    3/4     Running   0          2m12s
+crunchy-postgres-pgbouncer-859d797ffc-2qzbc   2/2     Running   0          2m12s
+crunchy-postgres-pgbouncer-859d797ffc-77sk2   2/2     Running   0          2m12s
+crunchy-postgres-repo-host-0                  2/2     Running   0          2m12s
+
+PODS
+crunchy-postgres-ha-8ltn-0
+crunchy-postgres-ha-d4ml-0
+crunchy-postgres-pgbouncer-859d797ffc-2qzbc
+crunchy-postgres-pgbouncer-859d797ffc-77sk2
+crunchy-postgres-repo-host-0
+
+
+-crunchy-postgres-ha-8ltn-0
+The logs for the crunchy-postgres-ha-8ltn-0 pod indicate that the PostgreSQL database cluster is being initialized and bootstrapped. 
+The database cluster has been successfully initialized, and the server is now accepting connections.
+The logs also show that the pod is not yet considered healthy enough for the leader race, which suggests that the 
+initialization process may still be ongoing or that some checks for health are failing. However, the pod is still functioning and processing requests.
+
+-crunchy-postgres-ha-d4ml-0
+It looks like the crunchy-postgres-ha-d4ml-0 pod is currently in the process of bootstrapping from the leader crunchy-postgres-ha-8ltn-0. 
+This is a normal part of the operation when setting up a high-availability PostgreSQL cluster with Patroni. 
+The leader is responsible for managing the cluster and coordinating actions such as bootstrapping new replicas. 
+The follower (crunchy-postgres-ha-d4ml-0 in this case) is syncing its data and configuration with the leader to ensure consistency across the cluster.
+
+-crunchy-postgres-pgbouncer-859d797ffc-2qzbc
+The logs for crunchy-postgres-pgbouncer-859d797ffc-2qzbc indicate that there are no transactions or 
+queries being processed during the recorded times. The server seems to be idle during these periods.
+
+-crunchy-postgres-pgbouncer-859d797ffc-77sk2
+crunchy-postgres-pgbouncer-859d797ffc-77sk2
+no logs 
+
+-crunchy-postgres-repo-host-0
+It seems like the log you provided is from pgbackrest on the crunchy-postgres-repo-host-0 pod. 
+The pgbackrest process is starting and configuring its TLS settings. 
+
+
+The resource quotas for the afa0a8-dev namespace are as follows:
+
+compute-best-effort-quota
+Resource: pods
+Used: 0
+Hard limit: 3
+
+compute-long-running-quota
+Resources:
+limits.cpu: Used 710m, Hard limit 1500m
+limits.memory: Used 2208Mi, Hard limit 4Gi
+pods: Used 5, Hard limit 100
+requests.cpu: Used 22m, Hard limit 500m
+requests.memory: Used 1120Mi, Hard limit 2Gi
+
+compute-time-bound-quota
+Resources:
+limits.cpu: Used 0, Hard limit 1500m
+limits.memory: Used 0, Hard limit 4Gi
+pods: Used 0, Hard limit 100
+requests.cpu: Used 0, Hard limit 500m
+requests.memory: Used 0, Hard limit 2Gi
+
+services-quota
+Resources:
+services.loadbalancers: Used 0, Hard limit 0
+services.nodeports: Used 0, Hard limit 0
+
+snapshot-quota
+Resource: count/volumesnapshots.snapshot.storage.k8s.io
+Used: 0
+Hard limit: 5
+
+storage-netapp-block-extended-quota
+Resources:
+netapp-block-extended.storageclass.storage.k8s.io/persistentvolumeclaims: Used 0, Hard limit 0
+netapp-block-extended.storageclass.storage.k8s.io/requests.storage: Used 0, Hard limit 0
+
+storage-netapp-block-standard-quota
+Resources:
+netapp-block-standard.storageclass.storage.k8s.io/persistentvolumeclaims: Used 2, Hard limit 60
+netapp-block-standard.storageclass.storage.k8s.io/requests.storage: Used 960Mi, Hard limit 1Gi
+
+storage-netapp-file-backup-quota
+Resources:
+netapp-file-backup.storageclass.storage.k8s.io/persistentvolumeclaims: Used 1, Hard limit 5
+netapp-file-backup.storageclass.storage.k8s.io/requests.storage: Used 64Mi, Hard limit 1Gi
+
+storage-netapp-file-extended-quota
+Resources:
+netapp-file-extended.storageclass.storage.k8s.io/persistentvolumeclaims: Used 0, Hard limit 0
+netapp-file-extended.storageclass.storage.k8s.io/requests.storage: Used 0, Hard limit 0
+
+storage-netapp-file-standard-quota
+Resources:
+netapp-file-standard.storageclass.storage.k8s.io/persistentvolumeclaims: Used 0, Hard limit 60
+netapp-file-standard.storageclass.storage.k8s.io/requests.storage: Used 0, Hard limit 1Gi
+
+storage-quota
+Resources:
+persistentvolumeclaims: Used 3, Hard limit 60
+requests.storage: Used 1Gi, Hard limit 1Gi
+
+
+
+
+
+***************************************************************************************************
+App.js code before express/keycloak stuff:
+// App.js
+
+import React, { createContext } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { initializeKeycloak } from './services/keycloak';
+import HomePage from './pages/HomePage.js';
+import DashboardPage from './pages/DashboardPage';
+import ControlLedgerPage from './pages/ControlLedgerPage';
+import DeckedCruiseBillingPage from './pages/DeckedCruiseBillingPage';
+import PipelineMarksPage from './pages/PipelineMarksPage';
+import MLCOilandGasPage from './pages/MLCOilandGasPage';
+import TimberMarkReportLookupPage from './pages/TimberMarkReportLookupPage';
+
+export const AuthenticationContext = createContext('authentication');
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={ <HomePage />} />
+        <Route path="/dashboard" element={ <DashboardPage /> } />
+        <Route path="/control-ledger" element={ <ControlLedgerPage /> } />
+        <Route path="/decked-cruise-billing" element={ <DeckedCruiseBillingPage /> } />
+        <Route path="/pipeline-marks" element={ <PipelineMarksPage /> } />
+        <Route path="/mlc-oil-and-gas" element={ <MLCOilandGasPage /> } />
+        <Route path="/timber-mark-report-lookup" element={ <TimberMarkReportLookupPage /> } />
+      </Routes>
+    </Router>
+  );
+}
+
+// *******KEYCLOAK INTEGRATION
+export const AuthenticationContext = createContext('authentication');
+
+function App() {
+  const [keycloak, setKeycloak] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const initKeycloak = useCallback(async () => {
+    const _keycloak = await initializeKeycloak();
+    setIsAuthenticated(_keycloak.authenticated);
+    setKeycloak(_keycloak);
+  }, []);
+
+  useEffect(() => {
+    initKeycloak();
+  }, [initKeycloak]);
+
+  return (
+    <>
+      {isAuthenticated && ( 
+        <AuthenticationContext.Provider value={keycloak}>
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+            </Routes>
+          </Router>
+        </AuthenticationContext.Provider>
+      )} 
+    </>
+  );
+}
+
+export default App;
+*********************************************************************************
+
+// Server.js (keycloak login works, but doesnt load frontend)
+// server/server.js
+
+require('dotenv').config();
+
+
+const express = require('express');
+const cors = require('cors');
+const Keycloak = require('keycloak-connect');
+const https = require('https');
+const fs = require('fs');
+const winston = require('winston'); // server logs
+
+const app = express();
+
+// define keycloak variables based on .env 
+const keycloak = new Keycloak({}, {
+  realm: process.env.REACT_APP_SSO_REALM,
+  'auth-server-url': process.env.REACT_APP_SSO_AUTH_SERVER_URL,
+  'ssl-required': 'external',
+  resource: process.env.REACT_APP_SSO_CLIENT_ID,
+  'bearer-only': true,
+});
+
+app.use(cors()); // Enable CORS for all routes
+app.use(keycloak.middleware());
+
+app.get('/', (req, res) => {
+  res.send('Hello from the backend!');
+});
+
+app.get('/protected', keycloak.protect(), (req, res) => {
+  res.send('This is a protected endpoint');
+});
+
+// HTTPS configuration
+const options = {
+  key: fs.readFileSync('./ssl/localhost.key'),
+  cert: fs.readFileSync('./ssl/localhost.crt')
+};
+
+// run server on port 8080
+app.use(cors());
+https.createServer(options, app).listen(8080, () => {
+  console.log('Server running on https://localhost:8080');
+});
+
+// logger instance
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'server.log' }),
+  ],
+});
+
+// use logger to log messages
+logger.info('Server started');
+// log errors
+logger.error('An error occurred');
+
+// add log middleware to log request with morgan
+const morgan = require('morgan');
+app.use(morgan('combined', { stream: logger.stream }));
+
+// Cause an intentional error
+app.get('/error', (req, res) => {
+  throw new Error('Intentional error');
+});
+
+// proxy middleware to resolve cors error after authentication
+const { createProxyMiddleware } = require('http-proxy-middleware');
+
+app.use(
+  '/auth',
+  createProxyMiddleware({
+    target: 'https://dev.loginproxy.gov.bc.ca',
+    changeOrigin: true,
+  })
+);
+
+
+// v1
+// const express = require('express');
+// const cors = require('cors');
+// const axios = require('axios');
+
+// const app = express();
+// app.use(cors());
+
+// app.use('/', (req, res) => {
+//   axios.get('https://dev.loginproxy.gov.bc.ca/auth/realms/standard/protocol/openid-connect/token')
+//     .then(response => {
+//       res.send(response.data);
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       res.status(500).send('An error occurred');
+//     });
+// });
+
+// const port = 5000;
+
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
+
+// v2
+// const express = require('express');
+// const cors = require('cors');
+// const Keycloak = require('keycloak-connect');
+// const https = require('https');
+// const fs = require('fs');
+
+
+// const app = express();
+
+// // define keycloak variables based on .env 
+// const keycloak = new Keycloak({}, {
+//   realm: process.env.REACT_APP_SSO_REALM,
+//   'auth-server-url': process.env.REACT_APP_SSO_AUTH_SERVER_URL,
+//   'ssl-required': 'external',
+//   resource: process.env.REACT_APP_SSO_CLIENT_ID,
+//   'bearer-only': true,
+// });
+
+// app.use(cors());
+// app.use(keycloak.middleware());
+
+// app.get('/', (req, res) => {
+//   res.send('Hello from the backend!');
+// });
+
+// app.get('/protected', keycloak.protect(), (req, res) => {
+//   res.send('This is a protected endpoint');
+// });
+
+// // HTTPS configuration
+// const options = {
+//   key: fs.readFileSync('./ssl/localhost.key'),
+//   cert: fs.readFileSync('./ssl/localhost.crt')
+// };
+
+// https.createServer(options, app).listen(3001, () => {
+//   console.log('Server running on https://localhost:3001');
+// });
+*********************************************************************************

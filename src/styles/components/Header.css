@@ -4,17 +4,18 @@ body, html {
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #036;
   border-bottom: 2px solid #fcba19;
-  padding: 0 30px 0 0;
+  padding: 0 30px;
   color: #fff;
-  display: flex;
   height: 65px;
   top: 0;
   position: fixed;
   width: 100%;
   box-shadow: 0 6px 8px -4px #b3b1b3;
-  margin: 0;
   z-index: 1000;
 }
 
@@ -22,20 +23,18 @@ header h1 {
   font-family: 'BCSans', 'Noto Sans', Verdana, Arial, sans-serif;
   font-weight: normal;
   margin: 5px 5px 0 18px;
-  visibility: hidden;
 }
 
 header .banner {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  margin: 0 10px 0 0;
+  margin-right: 10px;
 }
 
 header .other {
   display: flex;
   align-items: center;
-  flex-grow: 1;
+  padding-right: 50px;
 }
 
 header a [class^="fas fa-"] {
@@ -47,8 +46,47 @@ header a [class^="fas fa-"] {
 }
 
 header .nav-btn {
-  display: block;
-  width: auto;
-  margin: 0 0 0 auto;
+  background: none;
+  border: none;
   cursor: pointer;
+}
+
+.other p {
+  margin-right: 20px; /* Adjust the margin-right value to add space between the message and the button */
+}
+
+.right-content {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Increase the margin-right value to add more space */
+}
+
+.BC-Gov-PrimaryButton-Dark {
+  background-color: #fff;
+  border: none;
+  border-radius: 4px;
+  color: #313132;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  font-family: ‘BCSans’, ‘Noto Sans’, Verdana, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.BC-Gov-PrimaryButton-Dark:hover {
+text-decoration: underline;
+background-color: #f2f2f2
+}
+
+:focus {
+outline: 4px solid #3B99FC;
+outline-offset: 1px;
+}
+
+.BC-Gov-PrimaryButton-Dark:active {
+background-color: #fff;
 }

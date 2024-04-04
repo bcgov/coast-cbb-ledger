@@ -7,10 +7,12 @@ const cors = require('cors');
 const Keycloak = require('keycloak-connect');
 const https = require('https');
 const fs = require('fs');
+const winston = require('winston');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 
-// define keycloak variables based on .env 
+// Define Keycloak variables based on .env
 const keycloak = new Keycloak({}, {
   realm: process.env.REACT_APP_SSO_REALM,
   'auth-server-url': process.env.REACT_APP_SSO_AUTH_SERVER_URL,
@@ -19,9 +21,33 @@ const keycloak = new Keycloak({}, {
   'bearer-only': true,
 });
 
-app.use(cors()); // Enable CORS for all routes
-app.use(keycloak.middleware());
+// HTTPS configuration
+const options = {
+  key: fs.readFileSync('./ssl/localhost.key'),
+  cert: fs.readFileSync('./ssl/localhost.crt')
+};
 
+// Middleware
+app.use(cors());
+app.use(keycloak.middleware());
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+// Logger instance
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'server.log' }),
+  ],
+});
+
+// Log middleware
+const morgan = require('morgan');
+app.use(morgan('combined', { stream: logger.stream }));
+
+// Routes
 app.get('/', (req, res) => {
   res.send('Hello from the backend!');
 });
@@ -30,79 +56,22 @@ app.get('/protected', keycloak.protect(), (req, res) => {
   res.send('This is a protected endpoint');
 });
 
-// HTTPS configuration
-const options = {
-  key: fs.readFileSync('./ssl/localhost.key'),
-  cert: fs.readFileSync('./ssl/localhost.crt')
-};
+// Error handling
+app.use((err, req, res, next) => {
+  logger.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
-// run server on port 8080
-app.use(cors());
+// Proxy middleware to resolve CORS error after authentication
+app.use(
+  '/auth',
+  createProxyMiddleware({
+    target: 'https://dev.loginproxy.gov.bc.ca',
+    changeOrigin: true,
+  })
+);
+
+// Start server
 https.createServer(options, app).listen(8080, () => {
   console.log('Server running on https://localhost:8080');
 });
-
-// v1
-// const express = require('express');
-// const cors = require('cors');
-// const axios = require('axios');
-
-// const app = express();
-// app.use(cors());
-
-// app.use('/', (req, res) => {
-//   axios.get('https://dev.loginproxy.gov.bc.ca/auth/realms/standard/protocol/openid-connect/token')
-//     .then(response => {
-//       res.send(response.data);
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       res.status(500).send('An error occurred');
-//     });
-// });
-
-// const port = 5000;
-
-// app.listen(port, () => {
-//   console.log(`Server running on port ${port}`);
-// });
-
-// v2
-// const express = require('express');
-// const cors = require('cors');
-// const Keycloak = require('keycloak-connect');
-// const https = require('https');
-// const fs = require('fs');
-
-
-// const app = express();
-
-// // define keycloak variables based on .env 
-// const keycloak = new Keycloak({}, {
-//   realm: process.env.REACT_APP_SSO_REALM,
-//   'auth-server-url': process.env.REACT_APP_SSO_AUTH_SERVER_URL,
-//   'ssl-required': 'external',
-//   resource: process.env.REACT_APP_SSO_CLIENT_ID,
-//   'bearer-only': true,
-// });
-
-// app.use(cors());
-// app.use(keycloak.middleware());
-
-// app.get('/', (req, res) => {
-//   res.send('Hello from the backend!');
-// });
-
-// app.get('/protected', keycloak.protect(), (req, res) => {
-//   res.send('This is a protected endpoint');
-// });
-
-// // HTTPS configuration
-// const options = {
-//   key: fs.readFileSync('./ssl/localhost.key'),
-//   cert: fs.readFileSync('./ssl/localhost.crt')
-// };
-
-// https.createServer(options, app).listen(3001, () => {
-//   console.log('Server running on https://localhost:3001');
-// });

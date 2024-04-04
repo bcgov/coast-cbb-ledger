@@ -8,6 +8,7 @@ const Navbar = () => {
     <nav className="navigation-main" id="navbar">
       <div className="container">
         <ul>
+        <li><Link to="/">Home</Link></li>
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/control-ledger">Control Ledger</Link></li>
           <li><Link to="/decked-cruise-billing">Decked Cruise Billing</Link></li>
