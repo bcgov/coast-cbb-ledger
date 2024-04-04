@@ -19,14 +19,15 @@ export const initializeKeycloak = async () => {
       _kc
         .updateToken(5)
         .then(function (refreshed) {
+          // Optionally, you can log to the console instead of showing an alert
           if (refreshed) {
-            alert('Token was successfully refreshed');
+            console.log('Token was successfully refreshed');
           } else {
-            alert('Token is still valid');
+            console.log('Token is still valid');
           }
         })
         .catch(function () {
-          alert('Failed to refresh the token, or the session has expired');
+          console.error('Failed to refresh the token, or the session has expired');
         });
     };
 
@@ -42,7 +43,7 @@ export const initializeKeycloak = async () => {
       _kc.login(loginOptions);
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 

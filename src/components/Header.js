@@ -9,10 +9,10 @@ import '../styles/components/Header.css'
 const Header = () => {
   const keycloak = useContext(AuthenticationContext);
 
-  const nameParts = keycloak.tokenParsed.name.split(', '); // Split by comma and space
-  const lastName = nameParts[0]; // Last name is the first part
-  const firstNameMiddleInitial = nameParts[1].split(' '); // Split the second part into first name and middle initial
-  const firstName = firstNameMiddleInitial[0]; // First name is the first part
+  const nameParts = keycloak.tokenParsed.name.split(', '); 
+  const lastName = nameParts[0]; 
+  const firstNameMiddleInitial = nameParts[1].split(' '); 
+  const firstName = firstNameMiddleInitial[0]; 
 
   return (
     <header>
@@ -26,8 +26,8 @@ const Header = () => {
       <div className="other">
           {keycloak && keycloak.authenticated && (
             <>
-            <p>Welcome, {firstName} {lastName}!</p>
-              <button className='BC-Gov-PrimaryButton-Dark' onClick={logout}>
+            <p className='welcome-msg'>Welcome, {firstName} {lastName}!</p>
+              <button className='BC-Gov-SecondaryButton-Dark' onClick={logout}>
                 Logout
               </button>
             </>
