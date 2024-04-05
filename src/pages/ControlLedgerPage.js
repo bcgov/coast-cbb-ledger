@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer'
 import '../styles/pages/ControlLedgerPage.css';
 
 const ControlLedgerPage = () => {
-  const [ setEntries ] = useState([]);
+  const [ entries, setEntries ] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/ledger_entries')
+    fetch('http://localhost:8080/api/ledger_entries')
       .then(response => response.json())
       .then(data => setEntries(data))
       .catch(error => console.error('Error fetching data', error));
@@ -176,6 +177,7 @@ const ControlLedgerPage = () => {
           </tbody>
         </table>
       </div>
+      <Footer />
     </div>
   );
 };

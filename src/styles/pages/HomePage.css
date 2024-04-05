@@ -45,7 +45,7 @@ body {
   .forest-image {
     max-width: 100%;
     width: 100%; /* Full width of container */
-    height: 900px;
+    height: 800px;
     display: block; /* Remove any default inline styles */
   }
   

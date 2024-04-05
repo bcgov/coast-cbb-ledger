@@ -3,6 +3,7 @@
 import React from 'react';
 import Header from '../components/Header.js'
 import Navbar from '../components/Navbar.js';
+import Footer from '../components/Footer'
 import Card from '../components/Card.js';
 import '../styles/pages/DashboardPage.css'
 
@@ -56,6 +57,7 @@ const DashboardPage = () => {
       <div className='dashboard-table-preview'> 
 
       </div>
+      <Footer />
     </div>
   );
 };

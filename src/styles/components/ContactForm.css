@@ -1,0 +1,89 @@
+/* styles/components/ContactForm.css */
+
+.contact-form {
+    margin: 0 auto;
+    max-width: 600px;
+    margin-top: 50px;
+    padding: 20px 60px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact-form h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #1a5a96; 
+  }
+  
+  .contact-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .contact-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact-form button {
+    padding: 10px 20px;
+    background-color: #036;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .contact-form button:hover {
+    background-color: #004d99;
+  }
+  
+  .contact-info-card {
+    margin-top: 100px;
+    background-color: #f8f9fa; 
+    border: 1px solid #c3cbd5; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; 
+    align-items: center;
+    flex-wrap: wrap; 
+    text-align: center;
+  }
+  
+  .contact-info-card img {
+    width: 200px; 
+    margin-right: 20px;
+  }
+  
+  .contact-info-card h2 {
+    font-family: 'BC Sans', sans-serif; 
+    color: #1a5a96; 
+    font-size: 20px; 
+    font-weight: 700; 
+    margin-bottom: 5px; 
+    margin-top: 0;
+    text-align: left;
+    flex: 1;
+  }
+  
+  .contact-info-card p {
+    margin: 0; 
+    font-family: 'BC Sans', sans-serif; 
+    color: #464341;
+    font-size: 16px; 
+    line-height: 1.5; 
+    text-align: left; 
+    flex: 1;
+  }
+  

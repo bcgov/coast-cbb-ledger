@@ -10,6 +10,7 @@ import DeckedCruiseBillingPage from './pages/DeckedCruiseBillingPage';
 import PipelineMarksPage from './pages/PipelineMarksPage';
 import MLCOilandGasPage from './pages/MLCOilandGasPage';
 import TimberMarkReportLookupPage from './pages/TimberMarkReportLookupPage';
+import ContactForm from './components/ContactForm';
 
 export const AuthenticationContext = createContext('authentication');
 
@@ -42,6 +43,7 @@ function App() {
               <Route path="/pipeline-marks" element={<PipelineMarksPage />} />
               <Route path="/mlc-oil-and-gas" element={<MLCOilandGasPage />} />
               <Route path="/timber-mark-report-lookup" element={<TimberMarkReportLookupPage />} />
+              <Route path="/contactform" element={<ContactForm/>} />
             </Routes>
           </Router>
         </AuthenticationContext.Provider>
