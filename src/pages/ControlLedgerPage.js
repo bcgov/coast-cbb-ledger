@@ -1,22 +1,18 @@
-// src/pages/ControlLedgerPage.js
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
 import '../styles/pages/ControlLedgerPage.css';
 
 const ControlLedgerPage = () => {
-  const [ entries, setEntries ] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:8080/api/ledger_entries')
-      .then(response => response.json())
-      .then(data => setEntries(data))
-      .catch(error => console.error('Error fetching data', error));
-  }, []);
-
-  const testData = [
+  const [entries, setEntries] = useState([]);
+  const [searchEntryType, setSearchEntryType] = useState('');
+  const [searchTimberMark, setSearchTimberMark] = useState('');
+  const [searchAdminOrg, setSearchAdminOrg] = useState('');
+  const [searchMinistryEmail, setSearchMinistryEmail] = useState('');
+  const [searchLicenseeEmail, setSearchLicenseeEmail] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [testData, setTestData] = useState([
     {
       id: 1,
       entry_type: 'Test Entry 1',
@@ -104,7 +100,17 @@ const ControlLedgerPage = () => {
       licence_cp: 'CP987',
       edrms: 'Y'
     }
-  ];
+  ]);
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredTestData = testData.filter(entry => {
+    return Object.values(entry).some(value =>
+      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   return (
     <div className='header-nav'>
@@ -112,6 +118,38 @@ const ControlLedgerPage = () => {
       <Navbar />
       <div className='control-ledger'>
         <h1>Control Ledger</h1>
+        <div className='search-bar'>
+          <input
+            type='text'
+            placeholder='Search Entry Type'
+            value={searchEntryType}
+            onChange={e => setSearchEntryType(e.target.value)}
+          />
+          <input
+            type='text'
+            placeholder='Search Timber Mark'
+            value={searchTimberMark}
+            onChange={e => setSearchTimberMark(e.target.value)}
+          />
+          <input
+            type='text'
+            placeholder='Search Admin Org'
+            value={searchAdminOrg}
+            onChange={e => setSearchAdminOrg(e.target.value)}
+          />
+          <input
+            type='text'
+            placeholder='Search Ministry Email Contact'
+            value={searchMinistryEmail}
+            onChange={e => setSearchMinistryEmail(e.target.value)}
+          />
+          <input
+            type='text'
+            placeholder='Search Licensee Email Contact'
+            value={searchLicenseeEmail}
+            onChange={e => setSearchLicenseeEmail(e.target.value)}
+          />
+        </div>
         <table>
           <thead>
             <tr>
@@ -144,7 +182,7 @@ const ControlLedgerPage = () => {
             </tr>
           </thead>
           <tbody>
-            {testData.map(entry => (
+            {filteredTestData.map(entry => (
               <tr key={entry.id}>
                 <td>{entry.entry_type}</td>
                 <td>{entry.timber_mark}</td>
@@ -183,3 +221,4 @@ const ControlLedgerPage = () => {
 };
 
 export default ControlLedgerPage;
+

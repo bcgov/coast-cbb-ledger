@@ -43,6 +43,10 @@ const logger = winston.createLogger({
     new winston.transports.Console(),
     new winston.transports.File({ filename: 'server.log' }),
   ],
+   // Add an additional format to log stack traces for errors
+   exceptionHandlers: [
+    new winston.transports.File({ filename: 'exceptions.log' }),
+  ],
 });
 
 // Log middleware
@@ -58,10 +62,10 @@ app.get('/protected', keycloak.protect(), (req, res) => {
   res.send('This is a protected endpoint');
 });
 
-// Error handling
+// Error handling middleware
 app.use((err, req, res, next) => {
-  logger.error(err.stack);
-  res.status(500).send('Something broke!');
+  logger.error(err.stack); // Log the stack trace of the error
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 // Proxy middleware to resolve CORS error after authentication
@@ -88,6 +92,26 @@ app.get('/api', async (req, res) => {
     res.json({ currentTime });
   } catch (err) {
     console.error('Error executing query', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// API endpoint to handle database queries
+app.get('/api', keycloak.protect(), async (req, res) => {
+  try {
+    // Get a client from the pool
+    const client = await pool.connect();
+
+    // Execute a sample query (select current timestamp) to test database connectivity
+    const result = await client.query('SELECT NOW()');
+
+    // Release the client back to the pool
+    client.release();
+
+    // Send the current timestamp as the response
+    res.json({ currentTime: result.rows[0].now });
+  } catch (error) {
+    console.error('Error executing database query:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

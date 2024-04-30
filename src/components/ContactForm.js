@@ -43,7 +43,7 @@ const ContactForm = () => {
             <h2>Coast Timber Pricing- Regional Office</h2>
             <p>103-2100 Labieux Road</p>
             <p>Nanaimo, BC | V9T 6E9</p>
-            <p>Phone: 250 739-8258</p>
+            <p>Email: capapplications@gov.bc.ca</p>
         </div>
       </div>
       <div className="contact-page">
