@@ -52,14 +52,20 @@ export const initializeKeycloak = async () => {
 // one of valid post logout redirect uris in the client configuration
 export const logout = () => {
   window.location.href = `https://logon7.gov.bc.ca/clp-cgi/logoff.cgi?retnow=1&returl=${encodeURIComponent(
-    `${process.env.REACT_APP_SSO_AUTH_SERVER_URL}/realms/${process.env.REACT_APP_SSO_REALM}/protocol/openid-connect/logout?post_logout_redirect_uri=` +
-      process.env.REACT_APP_SSO_REDIRECT_URI +
-      '&id_token_hint=' +
-      _kc.idToken,
+    `${process.env.REACT_APP_AUTH_SERVER_URL}/realms/${process.env.REACT_APP_SSO_REALM}/protocol/openid-connect/logout?post_logout_redirect_uri=` +
+    process.env.REACT_APP_SSO_REDIRECT_URI +
+    '&id_token_hint=' +
+    _kc.idToken,
   )}`;
-
+  
   // Clear Keycloak session
   _kc.clearToken();
   _kc.clearRefreshToken();
   _kc.clearAuthz();
 };
+
+// Debugging
+console.log('Keycloak URL:', process.env.REACT_APP_AUTH_SERVER_URL);
+console.log('Realm:', process.env.REACT_APP_SSO_REALM);
+console.log('Client ID:', process.env.REACT_APP_SSO_CLIENT_ID);
+console.log('Redirect URI:', process.env.REACT_APP_SSO_REDIRECT_URI);

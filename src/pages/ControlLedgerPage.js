@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import '../styles/pages/ControlLedgerPage.css';
 
 const ControlLedgerPage = () => {
+  // eslint-disable-next-line no-unused-vars
   const [entries, setEntries] = useState([]);
   const [searchEntryType, setSearchEntryType] = useState('');
   const [searchTimberMark, setSearchTimberMark] = useState('');
@@ -12,6 +13,7 @@ const ControlLedgerPage = () => {
   const [searchMinistryEmail, setSearchMinistryEmail] = useState('');
   const [searchLicenseeEmail, setSearchLicenseeEmail] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [testData, setTestData] = useState([
     {
       id: 1,
@@ -102,6 +104,7 @@ const ControlLedgerPage = () => {
     }
   ]);
 
+  // eslint-disable-next-line no-unused-vars
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -221,4 +224,3 @@ const ControlLedgerPage = () => {
 };
 
 export default ControlLedgerPage;
-
