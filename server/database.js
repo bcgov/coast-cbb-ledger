@@ -17,4 +17,20 @@ pool.on('error', (err, client) => {
   process.exit(-1);
 });
 
-module.exports = pool;
+const getTestEntries = async () => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM entries'); // Change 'test_entries' to 'entries' if you've changed the table name
+    client.release();
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching test entries:', error);
+    throw error;
+  }
+};
+
+module.exports = {
+  pool,
+  getTestEntries,
+};
+

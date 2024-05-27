@@ -1,0 +1,25 @@
+/* styles/components/TextInput.css */
+
+.text_label {
+    margin-bottom: 15px;
+  }
+  
+  .text_label label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+  }
+  
+  .text_input {
+    height: 34px;
+    border: 2px solid #606060;
+    border-radius: 4px;
+    padding: 5px 7px;
+    font-size: 18px;
+  }
+  
+  .text_input[type="text"]:focus {
+    outline: 4px solid #3B99FC;
+    outline-offset: 1px;
+  }
+  
